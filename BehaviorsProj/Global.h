@@ -106,8 +106,6 @@ public:
 	static int str2int(string num);
 	static double str2double(string num);
 	static int* getValuesArray(string value);
-	//static int getRotateDirection(double current, double end);
-	//static Point pointInMap(int row, int col);
 };
 
 #define X_LONG_RESOLUTION_POINT -10

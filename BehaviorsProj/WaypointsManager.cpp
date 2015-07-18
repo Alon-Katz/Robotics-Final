@@ -128,58 +128,6 @@ double WaypointsManager::calc_yaw(double m, Location cell_from, Location cell_to
 			return (angle);
 		}
 	}
-
-//	double angle;
-//
-//	if(!is_verticle)
-//	{
-//		angle = 180 * atan(m) / M_PI;
-//	}
-//
-//	if (is_verticle)
-//	{
-//		if (cell_to.y_Coordinate > cell_from.y_Coordinate)
-//		{
-//			return (90);
-//		}
-//		else
-//		{
-//			return (270);
-//		}
-//	}
-//	else if ( m == 0)
-//	{
-//		if (cell_to.x_Coordinate > cell_from.x_Coordinate)
-//		{
-//			return (angle);
-//		}
-//		else
-//		{
-//			return (180 + angle);
-//		}
-//	}
-//	else if (m > 0)
-//	{
-//		if (cell_to.y_Coordinate > cell_from.y_Coordinate)
-//		{
-//			return (angle);
-//		}
-//		else
-//		{
-//			return (180 + angle);
-//		}
-//	}
-//	else
-//	{
-//		if (cell_to.y_Coordinate > cell_from.y_Coordinate)
-//		{
-//			return (90 + angle);
-//		}
-//		else
-//		{
-//			return (360 - angle);
-//		}
-//	}
 }
 
 double WaypointsManager::calc_incline(Location cell_from, Location cell_to)
@@ -188,7 +136,6 @@ double WaypointsManager::calc_incline(Location cell_from, Location cell_to)
 	if(cell_from.getX() == cell_to.getX())
 	{
 		is_verticle = 1;
-		// TODO- CHECK if ok
 		return(9999);
 	}
 	else
@@ -220,7 +167,6 @@ bool WaypointsManager::isInWayPoint(double x,double y)
 	cout << "yaw" << nextWayPoint.yaw <<  endl;
 	cout << (distance) << endl;
 
-	//if (distance*_gridResolution <= TOLLERANCE)
 	if (distance*_gridResolution <= TOLLERANCE)
 	{
 		return true;

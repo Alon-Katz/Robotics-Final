@@ -11,7 +11,6 @@ Manager::Manager(Robot* robot, Plan* pln, LocalizationManager* l_manager, Config
 	_robot = robot;
 	_wayPointsManager = wayPointsManager;
 	_curr = pln->getStartPoint();
-	//_curr = new GoToWayPoint(&_robot, &_wayPointsManager);
 
 	_localization_manager = new LocalizationManager();
 	_cm = cm;
@@ -21,14 +20,8 @@ void Manager::run()
 	wayPoint wpm;
 	set<wayPoint>::iterator it;
 
-
-	// Perform the first behavior of the plan
-	//_curr->action();
 	_robot->Read();
 
-	//_robot->setX(_cm->start_x);
-	//_robot->setY(_cm->start_y);
-	//_robot->setYaw(_cm->yaw);
 
 	// Gets the position of the robot
 	double x_Coordinate = _robot->getXpos();
@@ -39,7 +32,6 @@ void Manager::run()
 	for (it = (_wayPointsManager->wayPoints).begin(); it != (_wayPointsManager->wayPoints).end(); ++it) {
 		wpm = *it;
 		_robot->Read();
-		//cout << " " << wpm.x_Coordinate << " " << wpm.y_Coordinate << " " << _robot->getXpos() << " " << _robot->getYpos() << endl;
 
 		_wayPointsManager->setNextWayPoint(wpm);
 
@@ -47,7 +39,6 @@ void Manager::run()
 
 		while (true){
 
-			//cout << _robot->getYaw() << endl;
 
 			// If the current behavior can't run
 			if(_curr->stopCond())

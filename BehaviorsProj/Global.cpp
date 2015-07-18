@@ -70,15 +70,3 @@ int* Global::getValuesArray(string value)
 
 	return arr;
 }
-
-/*
-int Global::getRotateDirection(double current, double end)
-{
-	if ((current + end) > 0)
-	{
-		return 1; // right rotation
-	}
-
-	return -1; // left rotation
-}
-*/

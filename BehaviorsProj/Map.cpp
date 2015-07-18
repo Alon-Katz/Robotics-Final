@@ -152,23 +152,12 @@ void Map::convertMapToGrid(double p_Grid_Resolution, double p_Map_Resolution, co
 	m_vec.clear();
 
 	// VEC TO GRID
-	//decode
 	lodepng::decode(m_vec, m_width, m_height, pngName);
 
 	cellSize = p_Grid_Resolution / p_Map_Resolution;
 
 	const unsigned int rowSize = floor(m_height/cellSize);
 	const unsigned int colSize = floor(m_width/cellSize);
-
-	// netanel bug...
-	//int matrix[n][m];
-
-	/*matrix = (int**)malloc(rowSize * sizeof(int*));
-
-	for (int i=0; i<rowSize; i++)
-	{
-		matrix[i] = (int*)malloc(colSize * sizeof(int));
-	}*/
 
 	matrix = new int *[rowSize] ;
 
@@ -226,7 +215,7 @@ int Map::checkIfOccupy(int gridRow, int gridCol, int cellSize)
 		for (int singleCellCol = originalCol; singleCellCol < originalCol + 4; singleCellCol++)
 		{
 			int current_pixel = (SingleCellRow * 4 * m_width) + (singleCellCol * 4);
-			//cout << current_pixel << endl;
+
 			if ((m_vec[current_pixel] != 255) ||	// R
 					(m_vec[current_pixel + 1] != 255) || // G
 					(m_vec[current_pixel + 2] != 255)) // B

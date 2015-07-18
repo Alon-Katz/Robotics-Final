@@ -1,15 +1,18 @@
 // ----------------------------------------------------------------------------------------
-// Date: 15.7.15
+// Behavior.h
 // Professional Developers:
-// Natanel Beber - 308480284 , Alon Kats - 204368450 , Itay Eylon - 307872515
+// Natanel Beber - 308480284 , Alon Katz - 204368450 , Itay Eylon - 307872515
+// Date: 15.7.15
 //
 // ----------------------------------------------------------------------------------------
+
+// The Behavior class is the decision-making system of the robot's movement in the space
 
 #include "Behavior.h"
 
 Behavior::Behavior(Robot* robot) {
 
-	// Get the  robot's instance
+	// Get the robot's instance
 	_robot = robot;
 
 	// Init Other variables

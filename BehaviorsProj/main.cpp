@@ -1,9 +1,10 @@
-/*
- * main.cpp
- *
- *  Created on: Dec 14, 2014
- *      Author: user
- */
+// ----------------------------------------------------------------------------------------
+// main.cpp
+// Professional Developers:
+// Natanel Beber - 308480284 , Alon Katz - 204368450 , Itay Eylon - 307872515
+// Date: 15.7.15
+//
+// ----------------------------------------------------------------------------------------
 
 #include <iostream>
 #include "Robot.h"
@@ -11,36 +12,42 @@
 #include "Map.h"
 #include "ConfigurationManager.h"
 #include <vector>
-//#include "WaypointsManager.h"
+
+#define SELECTED_WAY_POINTS 3
 
 using namespace std;
 
 int main()
 {
+	// Read Configuration File
+	ConfigurationManager ConfigData(CONFIGURATION_PATH);
 
-	ConfigurationManager configData(CONFIGURATION_PATH);
+	// Inflate Map, Change to Grid and Resize
+	Map Map(ConfigData.grid_resolution);
 
-	Map map(configData.grid_resolution);
-	vector<Location> wayPoints = map.InitMap(configData);
-	Robot robot("localhost",6665,&configData, map.m_width);
+	// Get Location from ASTAR Algo
+	vector<Location> PathLocations = Map.InitMap(ConfigData);
 
-	WaypointsManager wp(wayPoints, configData.grid_resolution, configData.map_resolution);
-		wp.build_way_point_vector(3);
+	// Play The Robot
+	Robot Robot("localhost",6665,&ConfigData, Map.m_width);
 
-		wayPoint wpm;
-		set<wayPoint>::iterator it;
+	// Manage Way Points
+	WaypointsManager WayPointMangaer(PathLocations, ConfigData.grid_resolution, ConfigData.map_resolution);
 
-		for (it = (wp.wayPoints).begin(); it != (wp.wayPoints).end(); ++it) {
-			wpm = *it;
-			cout << wpm.x_Coordinate << " " << wpm.y_Coordinate << " " << wpm.yaw << endl;
-		}
+	// Set every third location to be a waypoint
+	WayPointMangaer.build_way_point_vector(SELECTED_WAY_POINTS);
 
-		PlnObstacleAvoid plnOA(&robot, &wp);
-		LocalizationManager lm;
+	// How to avoid obstacles
+	PlanObstacleAvoid PlanObstacleAvoid(&Robot, &WayPointMangaer);
 
+	// Where the robot is realy is
+	LocalizationManager LocalizationManager;
 
-		Manager manager(&robot, &plnOA, &lm, &configData, &wp);
-		manager.run();
+	// Start the Logic
+	Manager manager(&Robot, &PlanObstacleAvoid, &LocalizationManager, &ConfigData, &WayPointMangaer);
+
+	// Run until we get to destination
+	manager.run();
 
  	return 0;
 }

@@ -206,7 +206,6 @@ string PathPlanner::pathFind( int  xStart, int  yStart,
 
                     delete m0;
                 }
-                //else delete m0; // garbage collection
             }
         }
         delete n0; // garbage collection

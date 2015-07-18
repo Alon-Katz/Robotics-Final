@@ -11,12 +11,13 @@ Robot::Robot(char* ip, int port, ConfigurationManager* cm, int grid_rows) {
 	_grid_rows = grid_rows;
 
 	_pp->SetMotorEnable(true);
+
 	//For fixing Player's reading BUG
 	for(int i=0;i<15;i++)
 		Read();
 
 	_pp->SetOdometry(((double)cm->start_x / (_cm->grid_resolution / _cm->map_resolution)/ (_cm->grid_resolution)), ((_grid_rows / _cm->grid_resolution) - (((double)cm->start_y) / (_cm->grid_resolution / _cm->map_resolution)/ (_cm->grid_resolution))) ,cm->yaw*M_PI/180);
-	}
+}
 
 void Robot::Read()
 {
@@ -51,7 +52,6 @@ bool Robot::isForwardFree() {
 double Robot::getXpos()
 {
 	return ((_pp->GetXPos()) * _cm->grid_resolution);
-	//return ((_pp->GetXPos()) / _cm->map_resolution);
 }
 
 double Robot::getYpos()

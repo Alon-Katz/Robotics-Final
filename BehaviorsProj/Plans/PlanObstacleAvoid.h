@@ -11,12 +11,12 @@
 #include "Plan.h"
 #include "../WaypointsManager.h"
 
-class PlnObstacleAvoid: public Plan {
+class PlanObstacleAvoid: public Plan {
 
 public:
-	PlnObstacleAvoid(Robot* robot,WaypointsManager* wpm);
+	PlanObstacleAvoid(Robot* robot,WaypointsManager* wpm);
 	Behavior* getStartPoint();
-	virtual ~PlnObstacleAvoid();
+	virtual ~PlanObstacleAvoid();
 };
 
 #endif /* PLNOBSTACLEAVOID_H_ */

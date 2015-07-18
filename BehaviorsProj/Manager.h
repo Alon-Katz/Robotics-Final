@@ -7,7 +7,7 @@
 
 #ifndef MANAGER_H_
 #define MANAGER_H_
-#include "Plans/PlnObstacleAvoid.h"
+#include "Plans/PlanObstacleAvoid.h"
 #include "Robot.h"
 #include "LocalizationManager.h"
 #include "WaypointsManager.h"

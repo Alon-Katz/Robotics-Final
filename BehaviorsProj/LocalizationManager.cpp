@@ -1,9 +1,10 @@
-/*
- * LocalizationManager.cpp
- *
- *  Created on: Jun 17, 2015
- *      Author: Alon Katz
- */
+// ----------------------------------------------------------------------------------------
+// LocalizationManager.h
+// Professional Developers:
+// Natanel Beber - 308480284 , Alon Katz - 204368450 , Itay Eylon - 307872515
+// Date: 15.7.15
+//
+// ----------------------------------------------------------------------------------------
 
 #include "LocalizationManager.h"
 
@@ -13,7 +14,7 @@ LocalizationManager::LocalizationManager() {
     arrParticles.push_front(*p);
 }
 
-// This function runs the particle filter algorithm
+// Run the particles filter algo
 void LocalizationManager::update(double dX, double dY, double dTeta, double deltaX, double deltaY,
                 double deltaTeta, LaserProxy* pLaserProxy)
 {
@@ -37,7 +38,6 @@ void LocalizationManager::update(double dX, double dY, double dTeta, double delt
         }
         else if (dBelief > STANDARD)
         {
-            //createChildren(dX, dY, 0.3, 5);
         	createChildren(dX, dY, PARTICLE_RANGE, PARTICLE_NUM_TO_CREATE);
         }
 
@@ -46,7 +46,7 @@ void LocalizationManager::update(double dX, double dY, double dTeta, double delt
     }
 }
 
-// This function creates new particels to the robot
+// Creates new particles to the robot
 void LocalizationManager::createChildren(double dX, double dY, double dRange, int nParticlesNum)
 {
 	// Increase the size of the robot only if its below 100
@@ -58,14 +58,15 @@ void LocalizationManager::createChildren(double dX, double dY, double dRange, in
                 double randX = ((double) (rand() % 101) / 100.0) * dRange;
                 double randY = ((double) (rand() % 101) / 100.0) * dRange;
                 double randYaw = ((double) (rand() % 1000) / 1000.0);
-                // Create new cell coordiante by new coordinates
+
+                // Create new locations
                 Location new_cell(dX + randX, dY + randY);
                 arrParticles.push_front(Particle(new_cell, randYaw));
             }
         }
 }
 
-// This function return the particle with the highest probability
+// Return the particle with the highest probability
 Particle* LocalizationManager::getHighestProbParticle()
 {
     list<Particle>::iterator it;
