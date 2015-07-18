@@ -1,0 +1,10 @@
+map_path: telem.png
+start_x: 0
+start_y: 0
+yaw: 20
+target_x: 5
+target_y: 5
+robot_length: 1
+robot_width: 1
+map_resolution: 1
+grid_resolution: 1
